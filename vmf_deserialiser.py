@@ -66,7 +66,6 @@ def read_block(text, index):
                 block_name = block_buffer[0]
             else:
                 block_name = block_buffer[0] + "&" + str(duped_num)
-            # Why does this work?
             
             block_dict[block_name] = block_buffer[1]
             i += block_buffer[-1]
