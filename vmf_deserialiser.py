@@ -11,9 +11,9 @@ def read_keyval(text, index):
         character = text[i]
         
         if character == "{":
-            print("?: keyvalue encountered {")
+            print("Warning: keyvalue encountered {")
         if character == "}":
-            print("?: keyvalue encountered }")
+            print("Warning: keyvalue encountered }")
             
         if character == '"': # First iteration should trigger this!
             marks_counter += 1
@@ -110,9 +110,9 @@ def read_loop(vmf_text):
             i += 1 #take it off the last quotation mark
             continue #
         if character == "}":
-            print("?: encountered vacuum }")
+            print("Warning: encountered vacuum }")
         if character == '"':
-            print('?: encountered vacuum "')
+            print('Warning: encountered vacuum "')
         i += 1
     return vmf_dict
 def deserialise_vmf(filename):
