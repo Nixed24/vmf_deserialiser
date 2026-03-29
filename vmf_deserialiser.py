@@ -13,9 +13,9 @@ def read_keyval(text, index):
         character = text[i]
         
         if character == "{":
-            print("?: keyvalue encountered {")
+            print("Warning: keyvalue encountered {")
         if character == "}":
-            print("?: keyvalue encountered }")
+            print("Warning: keyvalue encountered }")
             
         if character == '"': # First iteration should trigger this!
             marks_counter += 1
@@ -39,7 +39,7 @@ def read_block(text, index):
         if text[i_char] == "\n":
             reading_name = True
             continue
-        if text[i_char] == "\t" or text[i_char] == "}":
+        if text[i_char] == "\t" or text[i_char] == "}": # For some reason linebreaks are only read half the time
             if reading_name == True:
                 break
             reading_name = False
@@ -117,9 +117,9 @@ def read_loop(vmf_text):
             i += 1 #take it off the last quotation mark
             continue #
         if character == "}":
-            print("?: encountered vacuum }")
+            print("Warning: encountered vacuum }")
         if character == '"':
-            print('?: encountered vacuum "')
+            print('Warning: encountered vacuum "')
         i += 1
     return vmf_dict
 def deserialise_vmf(filename):
