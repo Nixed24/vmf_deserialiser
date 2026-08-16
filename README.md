@@ -1,5 +1,5 @@
 # vmf_deserialiser
-Short program that turns VMF files into Python dicts.
+Short program that turns VMF files into Python ```dict```s.
 
 In order to use it in a Python program, move ```vmf_deserialiser.py``` to the folder of your program and include
 ```import vmf_deserialiser```
