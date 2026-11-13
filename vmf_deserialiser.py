@@ -86,7 +86,6 @@ def read_block(text, index):
                     block_name = block_buffer[0]
             else:
                 block_name = block_buffer[0] + "&" + str(duped_num)
-            # Why does this work?
             
             block_dict[block_name] = block_buffer[1]
             i += block_buffer[-1]
@@ -96,10 +95,24 @@ def read_block(text, index):
             return (name, block_dict, (i-index))
         if character == '"':
             keyval_buffer = read_keyval(text, i)
-            block_dict[keyval_buffer[0]] = keyval_buffer[1]
-            i += keyval_buffer[-1]
             
-            i += 1 #take it off the last quotation mark
+            try:
+                duped_num = duped_names_dict[keyval_buffer[0]]
+                keyval_name = keyval_buffer[0] + "&" + str(duped_num)
+                duped_names_dict[keyval_buffer[0]] += 1
+            except KeyError:
+                duped_names_dict[keyval_buffer[0]] = 1
+                duped_num = 0
+                if settings["tagFirstInstance"] == True:
+                    keyval_name = keyval_buffer[0] + "&" + str(duped_num)
+                else:
+                    keyval_name = keyval_buffer[0]
+            else:
+                keyval_name = keyval_buffer[0] + "&" + str(duped_num)
+            
+            block_dict[keyval_name] = keyval_buffer[1]
+            i += keyval_buffer[-1]
+            i += 1 #take it off the lasblockt quotation mark
             continue #
             
         i += 1
@@ -143,3 +156,5 @@ def deserialise_vmf(filename):
     text = read_in_vmf(filename)
     vmf_dict = read_loop(text)
     return vmf_dict
+
+test = deserialise_vmf("sdk_tr_target.vmf")
