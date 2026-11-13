@@ -14,7 +14,7 @@ REQUIRED LIBRARIES:
 @author: Nicks24 (GitHub)
 """
 
-settings = {"tagFirstInstance": True}
+_VMF_DESERIALISER_SETTINGS = {"tagFirstInstance": True}
 
 def read_in_vmf(vmf_filename):
     with open(vmf_filename, "r") as vmf_file:
@@ -80,7 +80,7 @@ def read_block(text, index):
             except KeyError:
                 duped_names_dict[block_buffer[0]] = 1
                 duped_num = 0
-                if settings["tagFirstInstance"] == True:
+                if _VMF_DESERIALISER_SETTINGS["tagFirstInstance"] == True:
                     block_name = block_buffer[0] + "&" + str(duped_num)
                 else:
                     block_name = block_buffer[0]
@@ -103,7 +103,7 @@ def read_block(text, index):
             except KeyError:
                 duped_names_dict[keyval_buffer[0]] = 1
                 duped_num = 0
-                if settings["tagFirstInstance"] == True:
+                if _VMF_DESERIALISER_SETTINGS["tagFirstInstance"] == True:
                     keyval_name = keyval_buffer[0] + "&" + str(duped_num)
                 else:
                     keyval_name = keyval_buffer[0]
@@ -133,7 +133,7 @@ def read_loop(vmf_text):
             except KeyError:
                 duped_names_dict[block_buffer[0]] = 1
                 duped_num = 0
-                if settings["tagFirstInstance"] == True:
+                if _VMF_DESERIALISER_SETTINGS["tagFirstInstance"] == True:
                     block_name = block_buffer[0] + "&" + str(duped_num)
                 else:
                     block_name = block_buffer[0]
@@ -156,5 +156,3 @@ def deserialise_vmf(filename):
     text = read_in_vmf(filename)
     vmf_dict = read_loop(text)
     return vmf_dict
-
-test = deserialise_vmf("sdk_tr_target.vmf")
